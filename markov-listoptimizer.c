@@ -75,7 +75,7 @@ int sanitarize(FILE *file, char *filename) {
 int emptyline(FILE *file, char *filename) {
 	FILE *asciize_file;
 	int c;
-	int prev_c = -1;
+	int prev_c = 10;
 	asciize_file = fopen(filename, "w");
 	if(asciize_file == NULL) {
 		printf("Error: file can't be created\a\n");
