@@ -33,9 +33,9 @@ int main(int argc, char *argv[]) {
 					fprintf(stderr, "Unknow option character \\x%x\a\n", optopt);
 				}
 				exit(EXIT_FAILURE);
+			default:
+				abort();
 		}
-		default:
-			abort();
 	}
 
 	if(hflag) {
