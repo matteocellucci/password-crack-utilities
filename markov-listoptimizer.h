@@ -1,4 +1,4 @@
-#define CACHE_FILE_NAME "asciize.txt"
+#define CACHE_FILE_NAME "markovlo.part.txt"
 
 /*
  * Stampa il manuale d'uso
