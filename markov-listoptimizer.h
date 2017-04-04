@@ -15,19 +15,11 @@ void usage();
 int sanitarize(FILE *, char *);
 
 /*
- * Copia il file passato in input rimuovendo le linee vuote
+ * Copia il file passato in input rimuovendo i caratteri di controllo eccetto
+ * le \n
  * Input: 	il file da copiare
- * 		il nome del nuovo dile
+ * 		il nome del nuovo file
  * Output: 	0 se è terminata correttamente
  *		1 se non è riuscita a creare il nuovo file
  */
-int emptyline(FILE *, char *);
-
-/*
- * Copia il file passato in input ottimizzando una word per riga
- * Input: 	il file da copiare
- * 		il nome del nuovo dile
- * Output: 	0 se è terminata correttamente
- *		1 se non è riuscita a creare il nuovo file
- */
-int optimize(FILE *, char *);
+int purge(FILE *, char *);
