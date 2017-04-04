@@ -16,7 +16,7 @@ int sanitarize(FILE *, char *);
 
 /*
  * Copia il file passato in input rimuovendo i caratteri di controllo eccetto
- * le \n
+ * \n non ripetute
  * Input: 	il file da copiare
  * 		il nome del nuovo file
  * Output: 	0 se è terminata correttamente

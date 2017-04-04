@@ -57,7 +57,7 @@ int sanitarize(FILE *file, char *filename) {
 		return 1;
 	}
 	while((c = fgetc(file)) != EOF) {
-		if(isprint(c)) {
+		if(isprint(c) || isspace(c)) {
 			fputc(c, asciize_file);
 		}
 	}
@@ -75,7 +75,7 @@ int purge(FILE *file, char *filename) {
 		return 1;
 	}
 	while((c = fgetc(file)) != EOF) {
-		if((c == 10 && prev_c != 10) || !iscntrl(c)) {
+		if((c == 10 && prev_c != 10) || isprint(c)) {
 			fputc(c, asciize_file);
 			prev_c = c;
 		}
