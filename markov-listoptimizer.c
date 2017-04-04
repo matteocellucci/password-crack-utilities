@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include "asciize.h"
+#include "markov-listoptimizer.h"
 
 int main(int argc, char *argv[]) {
 	FILE *file;
@@ -38,13 +38,13 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 		if(flag_sanitarize) {
-			return sanitarize(file, argv[2]);
+			exit_code = sanitarize(file, argv[2]);
 		}
 		else if(flag_emptyline) {
-			return emptyline(file, argv[2]);
+			exit_code = emptyline(file, argv[2]);
 		}
 		else if(flag_optimize) {
-			return optimize(file, argv[2]);
+			exit_code = optimize(file, argv[2]);
 		}
 		fclose(file);
 		remove(CACHE_FILE_NAME);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 	else {
 		usage();
 	}
-	return 0;
+	return exit_code;
 }
 
 int sanitarize(FILE *file, char *filename) {
