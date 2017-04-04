@@ -64,7 +64,7 @@ int sanitarize(FILE *file, char *filename) {
 		return 1;
 	}
 	while((c = fgetc(file)) != EOF) {
-		if(c>= 0 && c < 128) {
+		if(isprint(c)) {
 			fputc(c, asciize_file);
 		}
 	}
