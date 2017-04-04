@@ -10,7 +10,6 @@ int main(int argc, char *argv[]) {
 	int sflag = 0;
 	int pflag = 0;
 	int hflag = 0;
-	char *fvalue = NULL;
 	FILE *r_file;
 	FILE *w_file;
 
@@ -44,15 +43,14 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_SUCCESS);
 	}
 
-	fvalue = argv[optind];
-	if(rename(fvalue, CACHE_FILE_NAME) != 0) {
-		fprintf(stderr, "Error: %s can't be modified\a\n", fvalue);
+	r_file = fopen(argv[optind], "r");
+	if(r_file == NULL) {
+		fprintf(stderr, "Error: %s can't be read\a\n", argv[optind]);
 		exit(EXIT_FAILURE);
 	}
-	file = fopen(CACHE_FILE_NAME, "r");
-	if(file == NULL) {
-		fprintf(stderr, "Error: %s can't be updated\a\n", fvalue);
-		rename(CACHE_FILE_NAME, fvalue);
+	w_file = fopen(argv[optind + 1], "r");
+	if(w_file == NULL) {
+		fprintf(stderr, "Error: %s can't be writed\a\n", argv[optind + 1]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -63,52 +61,37 @@ int main(int argc, char *argv[]) {
 		purge(r_file, w_file);
 	}
 
-	fclose(file);
-	remove(CACHE_FILE_NAME);
+	fclose(r_file);
+	fclose(w_file);
 	exit(EXIT_SUCCESS);
 }
 
-FILE sanitarize(FILE *file, char *filename) {
-	FILE *opt_file;
+void sanitarize(FILE *r_file, FILE *w_file) {
 	int c;
-	opt_file = fopen(filename, "w");
-	if(opt_file == NULL) {
-		fprintf(stderr, "Error: %s can't be updated\a\n", fvalue);
-		rename(CACHE_FILE_NAME, fvalue);
-		exit(EXIT_FAILURE);
-	}
-	while((c = fgetc(file)) != EOF) {
+	while((c = fgetc(r_file)) != EOF) {
 		if(isprint(c) || isspace(c)) {
-			fputc(c, opt_file);
+			fputc(c, w_file);
 		}
 	}
-	fclose(file);
-	file = opt_file;
 }
 
-void purge(FILE *file, char *filename) {
-	FILE *opt_file;
+void purge(FILE *r_file, FILE *w_file) {
 	int c;
 	int prev_c = 10;
-	opt_file = fopen(filename, "w");
-	if(opt_file == NULL) {
-		printf("Error: file can't be created\a\n");
-		return 1;
-	}
-	while((c = fgetc(file)) != EOF) {
+	while((c = fgetc(r_file)) != EOF) {
 		if((c == 10 && prev_c != 10) || isprint(c)) {
-			fputc(c, opt_file);
+			fputc(c, w_file);
 			prev_c = c;
 		}
 	}
-	fclose(opt_file);
-	return 0;
 }
 
 void usage() {
 	printf("Markov List Optimizer\n");
 	printf("<link to github>\n\n");
-	printf("Usage: markovlo [OPTION] [FILE]\n");
+	printf("Usage: markovlo [OPTION] [SOURCE FILE] [DESTINATION FILE]\n");
 	printf("-s\tSanitarize input file from all non-ascii characters\n");
 	printf("-p\tPurge any control character (except of new lines)\n");
+	printf("-h\tPrint this message\n");
+	// TODO printf("-R\tRemove source file once finished\n");
 }
