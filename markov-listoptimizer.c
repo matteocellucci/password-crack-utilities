@@ -85,9 +85,11 @@ int purge(FILE *file, char *filename) {
 }
 
 void usage() {
+	printf("Markov List Optimizer\n");
 	printf("<link to github>\n\n");
-	printf("Usage: asciize [OPTION] [FILE]\n");
+	printf("Usage: markovlo [OPTION] [FILE]\n");
 	printf("--sanitarize\tCreate a new file, called asciized.txt, which is a copy\n");
 	printf("\t\tof the input without any non-ascii character\n");
-	printf("--purge\tRemove any control character (except of new lines) and multi-words line\n");
+	printf("--purge\t\tRemove any control character (except of new lines) and\n");
+	printf("\t\tmulti-words line\n");
 }
