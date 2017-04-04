@@ -10,6 +10,8 @@ int main(int argc, char *argv[]) {
 	int sflag = 0;
 	int pflag = 0;
 	int hflag = 0;
+	char *r_file_path = NULL;
+	char *w_file_path = NULL;
 	FILE *r_file;
 	FILE *w_file;
 
@@ -38,29 +40,41 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	if(hflag) {
+	if(hflag || argc == 1) {
 		usage();
 		exit(EXIT_SUCCESS);
 	}
 
-	r_file = fopen(argv[optind], "r");
-	if(r_file == NULL) {
-		fprintf(stderr, "Error: %s can't be read\a\n", argv[optind]);
+	r_file_path = argv[optind];
+	if(r_file_path == NULL) {
+		fprintf(stderr, "Error: source file needed\a\n");
 		exit(EXIT_FAILURE);
 	}
-	w_file = fopen(argv[optind + 1], "r");
-	if(w_file == NULL) {
-		fprintf(stderr, "Error: %s can't be writed\a\n", argv[optind + 1]);
+	w_file_path = argv[optind + 1];
+	if(w_file_path == NULL) {
+		fprintf(stderr, "Error: destination file needed\a\n");
 		exit(EXIT_FAILURE);
 	}
 
+
+	r_file = fopen(r_file_path, "r");
+	if(r_file == NULL) {
+		fprintf(stderr, "Error: %s can't be read\a\n", r_file_path);
+		exit(EXIT_FAILURE);
+	}
+	w_file = fopen(w_file_path, "r");
+	if(w_file == NULL) {
+		fprintf(stderr, "Error: %s can't be written\a\n", w_file_path);
+		exit(EXIT_FAILURE);
+	}
+/*
 	if(sflag) {
 		sanitarize(r_file, w_file);
 	}
 	if(pflag) {
 		purge(r_file, w_file);
 	}
-
+*/
 	fclose(r_file);
 	fclose(w_file);
 	exit(EXIT_SUCCESS);
