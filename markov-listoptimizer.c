@@ -67,14 +67,14 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "Error: %s can't be written\a\n", w_file_path);
 		exit(EXIT_FAILURE);
 	}
-/*
+
 	if(sflag) {
 		sanitarize(r_file, w_file);
 	}
 	if(pflag) {
 		purge(r_file, w_file);
 	}
-*/
+	
 	fclose(r_file);
 	fclose(w_file);
 	exit(EXIT_SUCCESS);
