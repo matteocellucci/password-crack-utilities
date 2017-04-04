@@ -11,7 +11,7 @@ markov-listoptimizer.o : markov-listoptimizer.c
 
 .PHONY : install remove clean
 
-install : $(NAME)
+install :
 	mv $(NAME) /usr/local/bin
 remove :
 	rm $(NAMEDIR)/$(NAME)
