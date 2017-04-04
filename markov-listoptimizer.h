@@ -12,7 +12,7 @@ void usage();
  * Output: 	0 se è terminata correttamente
  *		1 se non è riuscita a creare il nuovo file
  */
-int sanitarize(FILE *, char *);
+void sanitarize(FILE *, FILE *);
 
 /*
  * Copia il file passato in input rimuovendo i caratteri di controllo eccetto
@@ -22,4 +22,4 @@ int sanitarize(FILE *, char *);
  * Output: 	0 se è terminata correttamente
  *		1 se non è riuscita a creare il nuovo file
  */
-int purge(FILE *, char *);
+void purge(FILE *, FILE *);
