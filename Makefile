@@ -1,15 +1,19 @@
-CC=gcc
-CFLAGS=
+NAMEDIR = /usr/local/bin
+NAME = markovlo
+CC = gcc
+CFLAGS = -Wall
+OBJS = markov-listoptimizer.o
 
-asciize : asciize.o
-	$(CC) $(CFLAGS) asciize.o -o $@
-asciize.o : asciize.c
-	$(CC) $(CFLAGS) -c asciize.c -o $@
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+markov-listoptimizer.o : markov-listoptimizer.c
+	$(CC) $(CFLAGS) -c markov-listoptimizer.c -o $@
 
-.PHONY: install clean
+.PHONY : install remove clean
 
-install : asciize
-	mv asciize /usr/local/bin
-
+install : $(NAME)
+	mv $(NAME) /usr/local/bin
+remove :
+	rm $(NAMEDIR)/$(NAME)
 clean :
 	rm *.o
