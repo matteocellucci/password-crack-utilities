@@ -45,14 +45,19 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_SUCCESS);
 	}
 
+	if(optind == 1) {
+		fprintf(stderr, "Error: no option passed, use -h for help\a\n");
+		exit(EXIT_FAILURE);
+	}
+
 	r_file_path = argv[optind];
 	if(r_file_path == NULL) {
-		fprintf(stderr, "Error: source file needed\a\n");
+		fprintf(stderr, "Error: source file needed, use -h for help\a\n");
 		exit(EXIT_FAILURE);
 	}
 	w_file_path = argv[optind + 1];
 	if(w_file_path == NULL) {
-		fprintf(stderr, "Error: destination file needed\a\n");
+		fprintf(stderr, "Error: destination file needed, use -h for help\a\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -74,7 +79,7 @@ int main(int argc, char *argv[]) {
 	if(pflag) {
 		purge(r_file, w_file);
 	}
-	
+
 	fclose(r_file);
 	fclose(w_file);
 	exit(EXIT_SUCCESS);
