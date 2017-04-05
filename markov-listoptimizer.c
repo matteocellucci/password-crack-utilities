@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "Error: %s can't be read\a\n", r_file_path);
 		exit(EXIT_FAILURE);
 	}
-	w_file = fopen(w_file_path, "r");
+	w_file = fopen(w_file_path, "w");
 	if(w_file == NULL) {
 		fprintf(stderr, "Error: %s can't be written\a\n", w_file_path);
 		exit(EXIT_FAILURE);
