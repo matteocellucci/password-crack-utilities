@@ -1,9 +1,11 @@
 INSTALLATIONDIR = /usr/local/bin
+BINDIR = ../run
 CC = gcc
 CFLAGS = -Wall
 
 all : markovlo wlgen
-
+	mv markovlo $(BINDIR)
+	mv wlgen $(BINDIR)
 markovlo : markov-listoptimizer.o
 	$(CC) $(CFLAGS) markov-listoptimizer.o -o $@
 markov-listoptimizer.o : markov-listoptimizer.c
@@ -17,9 +19,8 @@ wordlist-gen.o : wordlist-gen.c
 .PHONY : install remove clean
 
 install :
-	mv markovlo /usr/local/bin
-	mv wlgen /usr/local/bin
-	make clean
+	cp $(BINDIR)/markovlo /usr/local/bin
+	cp $(BINDIR)/wlgen /usr/local/bin
 remove :
 	rm $(INSTALLATIONDIR)/$(NAME)
 clean :
