@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <unistd.h>
 #include <math.h>
 #include "wordlist-gen.h"
 
@@ -28,7 +31,7 @@ int main(int argc, char *argv[]) {
 	while((opt = getopt(argc, argv, "sph")) != -1) {
 		switch(opt) {
 			case 'n':
-				numvalue = optarg;
+				numvalue = atoi(optarg);
 				break;
 			case 'h':
 				hflag = 1;
@@ -51,7 +54,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_SUCCESS);
 	}
 
-	if(optind == 1 || numvalue = 0) {
+	if(optind == 1 || numvalue == 0) {
 		fprintf(stderr, "Error: use -n to specify depth\a\n");
 		exit(EXIT_FAILURE);
 	}
@@ -67,7 +70,7 @@ void combine(FILE *list, int depth) {
 	for(unsigned long long int i = 0; i < pow(PRINTABLE_SIZE, depth); i++) {
 		fputc(printable[i % PRINTABLE_SIZE], list);
 		if(depth > 1) {
-			combine(list, depth - 1, printable[i]);
+			combine(list, depth - 1);
 		}
 	}
 }
