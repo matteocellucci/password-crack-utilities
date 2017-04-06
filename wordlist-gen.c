@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 	int numvalue = 0;
 
 	opterr = 0;
-	while((opt = getopt(argc, argv, "sph")) != -1) {
+	while((opt = getopt(argc, argv, "nh")) != -1) {
 		switch(opt) {
 			case 'n':
 				numvalue = atoi(optarg);
