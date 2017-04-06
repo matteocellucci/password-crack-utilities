@@ -75,7 +75,7 @@ void combine(FILE *list, int depth) {
 void usage() {
 	printf("Worldlist generator\n");
 	printf("<link to github>\n\n");
-	printf("Usage: wordlist-gen [OPTION]\n");
+	printf("Usage: wlgen [OPTION]\n");
 	printf("-nNUM\tRecursion depth, it generates combinations of NUM characters\n");
 	printf("-h\tPrint this message\n");
 }
